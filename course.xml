@@ -21,6 +21,16 @@
 						<page string="Description">
 							<field name="description"/>
 						</page>
+					<page string="Sessions">
+						<field name="session_ids">
+							<tree name="Sessions">
+								<field name="name"/>
+								<field name="start_date"/>
+								<field name="instructor_id"/>
+								<field name="seats"/>
+							</tree>
+						</field>
+					</page>
 					</notebook>
 				</sheet>
 			</form>
