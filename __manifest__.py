@@ -8,7 +8,8 @@
 this is my academic information system module
 """,
 	"data" : ["menu.xml",
-		"course.xml"
+		"course.xml",
+		"session.xml"
 		],
 	"installable": True,
 	"auto_install" : False,

@@ -10,13 +10,6 @@
 		</field>
 	</record>
 
-
-	
-	<menuitem id="academic_0" name="Academic" sequence="10"/>
-	<menuitem id="academic_1" name="Academic" sequence="10" parent="academic_0"/>
-	<menuitem id="academic_1_1" action="action_course_list" name="Course" sequence="10" parent="academic_1"/>
-
-
 	<record id="action_session_list" model="ir.actions.act_window">
 		<field name="name">Session List</field>
 		<field name="res_model">academic.session</field>
@@ -28,8 +21,10 @@
 		</field>
 	</record>
 	
+	<menuitem id="academic_0" name="Academic" sequence="10"/>
+	<menuitem id="academic_1" name="Academic" sequence="10" parent="academic_0"/>
+	<menuitem id="academic_1_1" action="action_course_list" name="Course" sequence="10" parent="academic_1"/>
 	<menuitem id="academic_1_2" action="action_session_list" name="Session" sequence="20" parent="academic_1"/>
-	
 
 
 </odoo>
