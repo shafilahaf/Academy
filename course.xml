@@ -22,9 +22,9 @@
 							<field name="description"/>
 						</page>
 					<page string="Sessions">
-						<field name="session_ids">
+						<field name="session_ids"> # from course.py in section_ids
 							<tree name="Sessions">
-								<field name="name"/>
+								<field name="name"/> # link session.py from course.py they're join
 								<field name="start_date"/>
 								<field name="instructor_id"/>
 								<field name="seats"/>
