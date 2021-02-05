@@ -10,3 +10,4 @@ class session(models.Model):
     duration = fields.Integer('Duration')
     seats = fields.Integer('Number of Seats')
     active = fields.Boolean('Is Active?')
+    attendee_ids = fields.One2many('academic.attendee', 'session_id', 'Attendess', ondelete="cascade")

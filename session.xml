@@ -25,6 +25,17 @@
                             <field name="active"/>
                         </group>
                     </group>
+
+                    <notebook>
+                        <page string="Attendees">
+                            <field name="attendee_ids">
+                                <tree string="Attendee">
+                                    <field name="name"/>
+                                    <field name="partner_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>   
