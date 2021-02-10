@@ -1,0 +1,26 @@
+<odoo>
+    <record id="attendee_form" model="ir.ui.view">
+        <field name="name">attendee_form</field>
+        <field name="model">academic.attendee</field>
+        <field name="arch" type="xml">
+            <form string="Attendee Form" version="7.0">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"
+                            string="Attendee Name"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="session_id"/>
+                            <field name="partner_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>   
+    </record>
+</odoo>

@@ -2,7 +2,6 @@
 	<record id="course_form" model="ir.ui.view">
 		<field name="name">course_form</field>
 		<field name="model">academic.course</field>
-		
 		<field name="arch" type="xml">
 			<form string="Course Form" version="7.0">
 				<sheet>
