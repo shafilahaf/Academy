@@ -5,13 +5,13 @@
 	"author" : "Shafilah AF",
 	"category" : "Education",
 	"description" : """\
-this is my academic information system module
+This is My Academic Information System Module.
 """,
 	"data" : ["menu.xml",
-		"course.xml",
 		"session.xml",
+		"course.xml",
 		"attendee.xml",
-		"partner.xml"
+		"partner.xml",
 		],
 	"installable": True,
 	"auto_install" : False,
