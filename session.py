@@ -1,4 +1,5 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
+from odoo.exceptions import ValidationError
 
 class session(models.Model):
     _name = 'academic.session'
@@ -24,7 +25,15 @@ class session(models.Model):
                 r.taken_seats = 100.0 * len(r.attendee_ids) / r.seats
 
 
-    @api.onchange('seats', 'attendee_ids')
+    #The “onchange” mechanism provides a way for the client interface to 
+    # update a form whenever the user has filled in a value in a field, 
+    # without saving anything to the database.
+
+
+    #change the number of seats or participants, 
+    # and the taken_seats progressbar is automatically updated.
+
+    @api.onchange('seats', 'attendee_ids')  
     def _verify_valid_seats(self):
         if self.seats < 0:
             return {
@@ -40,3 +49,14 @@ class session(models.Model):
                     'message': "Increase seats or remove excess attendees",
                 },
             }
+
+
+    #A Python constraint is defined as a method decorated with constrains(), 
+    # and invoked on a recordset.
+
+    #Add a constraint that checks that the instructor is not present in the attendees of his/her own session.
+    @api.constrains('instructor_id', 'attendee_ids')
+    def _check_instructor_not_in_attendees(self):
+        for r in self:
+            if r.instructor_id and r.instructor_id in r.attendee_ids:
+                raise exceptions.ValidationError("A session's instructor can't be an attendee")
