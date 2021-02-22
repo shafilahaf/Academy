@@ -21,9 +21,9 @@
 							<field name="description"/>
 						</page>
 					<page string="Sessions">
-						<field name="session_ids"> 
+						<field name="session_ids">
 							<tree name="Sessions">
-								<field name="name"/> 
+								<field name="name"/>
 								<field name="start_date"/>
 								<field name="instructor_id"/>
 								<field name="seats"/>
@@ -35,5 +35,6 @@
 			</form>
 			</field>
 	</record>
+
 </odoo>
 

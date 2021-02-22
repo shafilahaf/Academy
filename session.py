@@ -8,10 +8,10 @@ class session(models.Model):
     course_id = fields.Many2one('academic.course', 'Course')
     instructor_id = fields.Many2one('res.partner', 'Instructor')
     name = fields.Char('Name', size=100, required=True)
-    start_date = fields.Date('Start Date', required=True)
+    start_date = fields.Date(default=fields.Date.today)
     duration = fields.Integer('Duration')
     seats = fields.Integer('Number of Seats')
-    active = fields.Boolean('Is Active?')
+    active = fields.Boolean(default=True)
     attendee_ids = fields.One2many('academic.attendee', 'session_id', 'Attendess', ondelete="cascade")
     taken_seats = fields.Float(string="Taken seats", compute='_taken_seats', store=False)
 
@@ -30,10 +30,10 @@ class session(models.Model):
     # without saving anything to the database.
 
 
-    #change the number of seats or participants, 
+    #change the number of seats or participants,
     # and the taken_seats progressbar is automatically updated.
 
-    @api.onchange('seats', 'attendee_ids')  
+    @api.onchange('seats', 'attendee_ids')
     def _verify_valid_seats(self):
         if self.seats < 0:
             return {
@@ -51,7 +51,7 @@ class session(models.Model):
             }
 
 
-    #A Python constraint is defined as a method decorated with constrains(), 
+    #A Python constraint is defined as a method decorated with constrains(),
     # and invoked on a recordset.
 
     #Add a constraint that checks that the instructor is not present in the attendees of his/her own session.
