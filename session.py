@@ -1,5 +1,6 @@
 from odoo import models, fields, api, exceptions
 from odoo.exceptions import ValidationError
+from datetime import timedelta
 
 class session(models.Model):
     _name = 'academic.session'
@@ -14,7 +15,8 @@ class session(models.Model):
     active = fields.Boolean(default=True)
     attendee_ids = fields.One2many('academic.attendee', 'session_id', 'Attendess', ondelete="cascade")
     taken_seats = fields.Float(string="Taken seats", compute='_taken_seats', store=False)
-
+    end_date = fields.Date(string="End Date", store=True, compute='_get_end_date', inverse='_set_end_date')
+    hours = fields.Float(string="Duration in Hours", compute='_get_hours', inverse='_set_hours')
 
     @api.depends('seats', 'attendee_ids')
     def _taken_seats(self):
@@ -24,6 +26,35 @@ class session(models.Model):
             else:
                 r.taken_seats = 100.0 * len(r.attendee_ids) / r.seats
 
+    @api.depends('start_date', 'duration')
+    def _get_end_date(self):
+        for r in self:
+            if not (r.start_date and r.duration):
+                r.end_date = r.start_date
+                continue
+
+            # Add duration to start_date, but: Monday + 5 days = Saturday, so
+            # subtract one second to get on Friday instead
+            duration = timedelta(days=r.duration, seconds=-1)
+            r.end_date = r.start_date + duration
+
+    def _set_end_date(self):
+        for r in self:
+            if not (r.start_date and r.end_date):
+                continue
+
+            # Compute the difference between dates, but: Friday - Monday = 4 days,
+            # so add one day to get 5 days instead
+            r.duration = (r.end_date - r.start_date).days + 1
+    
+    @api.depends('duration')
+    def _get_hours(self):
+        for r in self:
+            r.hours = r.duration * 24
+
+    def _set_hours(self):
+        for r in self:
+            r.duration = r.hours / 24
 
     #The “onchange” mechanism provides a way for the client interface to 
     # update a form whenever the user has filled in a value in a field, 

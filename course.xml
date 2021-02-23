@@ -16,6 +16,7 @@
 						<field name="responsible_id"/>
 					</group>
 
+
 					<notebook>
 						<page string="Description">
 							<field name="description"/>
@@ -35,6 +36,23 @@
 			</form>
 			</field>
 	</record>
+
+	<record id="view_course_filter" model="ir.ui.view">
+        <field name="name">course.filter</field>
+        <field name="model">academic.course</field>
+        <field name="arch" type="xml">
+            <search>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <filter name="my_courses_current" string="My Courses by current user"
+                            domain="[('responsible_id', '=', uid)]"/>
+                    <group string="Group By">
+                        <filter name="by_responsible" string="Responsible"
+                                context="{'group_by': 'responsible_id'}"/>
+                    </group>
+            </search>
+        </field>
+    </record>
 
 </odoo>
 
