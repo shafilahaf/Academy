@@ -60,6 +60,8 @@ class session(models.Model):
          "The course title must be unique"),
         ]
 
+    
+
 
     #A Python constraint is defined as a method decorated with constrains(),
     # and invoked on a recordset.
