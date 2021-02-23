@@ -50,13 +50,24 @@ class session(models.Model):
                 },
             }
 
+    _sql_constraints = [
+        ('name_description_check',
+         'CHECK(name != description)',
+         "The title of the course should not be the description"),
+
+        ('name_unique',
+         'UNIQUE(name)',
+         "The course title must be unique"),
+        ]
+
 
     #A Python constraint is defined as a method decorated with constrains(),
     # and invoked on a recordset.
 
     #Add a constraint that checks that the instructor is not present in the attendees of his/her own session.
-    @api.constrains('instructor_id', 'attendee_ids')
-    def _check_instructor_not_in_attendees(self):
-        for r in self:
-            if r.instructor_id and r.instructor_id in r.attendee_ids:
-                raise exceptions.ValidationError("A session's instructor can't be an attendee")
+
+    #@api.constrains('instructor_id', 'attendee_ids')
+    #def _check_instructor_not_in_attendees(self):
+     #  for r in self:
+      #      if r.instructor_id and r.instructor_id in r.attendee_ids:
+       #          raise exceptions.ValidationError("A session's instructor can't be an attendee")
