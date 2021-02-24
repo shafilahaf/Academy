@@ -7,7 +7,8 @@
 	"description" : """\
 This is My Academic Information System Module.
 """,
-	"data" : ["menu.xml",
+	"data" : [
+		"menu.xml",
 		"session.xml",
 		"course.xml",
 		"attendee.xml",
